@@ -13,6 +13,10 @@ public class Board : MonoBehaviour
     private TileBase floor;
     [SerializeField]
     private TileBase obstacle;
+    [SerializeField]
+    private GameObject playerCharacter;
+
+
     private Dictionary<int, TileBase> tiles = new Dictionary<int, TileBase>();
     private Dictionary<int, LevelsData.LevelData> _levelsData;
     private LevelDataLoader _dataLoader;
@@ -32,12 +36,17 @@ public class Board : MonoBehaviour
         _levelsData = _dataLoader.LoadLevelsData();  
         Debug.Log(_levelsData.Count + " levels have been stored in the dictionary!");
         var baseTilemap = GetComponentsInChildren<Tilemap>()[0];
-        Debug.Log(_levelsData);
-        Debug.Log(_levelsData[1]);
-        Debug.Log(_levelsData[1].number);
-        Debug.Log(_levelsData[1].tiles);
+        // Debug.Log(_levelsData);
+        // Debug.Log(_levelsData[1]);
+        // Debug.Log(_levelsData[1].number);
+        // Debug.Log(_levelsData[1].tiles);
         var mapData = ListToMap(_levelsData[1].tiles, _levelsData[1].rowLength);
         MapFunctions.RenderMap(mapData, baseTilemap, tiles);
+        Vector3Int cellPosition = baseTilemap.WorldToCell(transform.position);
+        Vector3 startPos = baseTilemap.GetCellCenterWorld(cellPosition);
+        startPos.z = -1;
+        //Vector3 startPos = new Vector3Int(0,0,0);
+        Instantiate(playerCharacter, startPos, Quaternion.identity);
     }
 
     private int[,] ListToMap(int[] tiles, int rowLength)
