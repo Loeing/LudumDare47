@@ -2,7 +2,23 @@ using UnityEngine;
 
 public class PlayerController : MoveController
 {
-    private void Update() {
+    private GameMaster gm;
+
+    private void Start()
+    {
+        gm = GameMaster.instance;
+    }
+
+    private void Update() 
+    {
+       if(gm.playerTurn)
+       {   
+            HandleInputs();           
+       } 
+    }
+
+    private void HandleInputs()
+    {
         if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             Move(Direction.Up);
@@ -17,6 +33,13 @@ public class PlayerController : MoveController
         }
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            Move(Direction.Right);        }
+            Move(Direction.Right);        
+        }   
+    }
+
+    public void Move(Direction dir)
+    {
+        base.Move(dir);
+        gm.playerTurn = false;
     }
 }

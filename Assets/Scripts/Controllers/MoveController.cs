@@ -8,7 +8,7 @@ public enum Direction
     Left,
     Right
 }
-public class MoveController : MonoBehaviour {
+public abstract class MoveController : MonoBehaviour {
     
     [SerializeField]
     private float tileDistance = 1f;
@@ -22,7 +22,7 @@ public class MoveController : MonoBehaviour {
     private float inverseMoveTime;
 
 
-    private void Start() {
+    protected virtual void Start() {
         //Get a component reference to this object's BoxCollider2D
         boxCollider = GetComponent <BoxCollider2D> ();
 
@@ -33,7 +33,7 @@ public class MoveController : MonoBehaviour {
         inverseMoveTime = 1f / moveTime;
     }
 
-    public void Move(Direction dir, bool axisMove=false)
+    public virtual void Move(Direction dir, bool axisMove=false)
     {
         Node endNode = currentNode;
         if(axisMove)
@@ -46,9 +46,9 @@ public class MoveController : MonoBehaviour {
                 endNode = currentNode;
                 //TODO: add non passable options like combat
             }
+            SharpMovement(endNode.center);
         }
         //StartCoroutine(SmoothMovement(endNode.center)); //add a bounce when not going anywhere
-        SharpMovement(endNode.center);
         currentNode = endNode;
     }
 
@@ -123,6 +123,7 @@ public class MoveController : MonoBehaviour {
 
     private void SharpMovement(Vector3 end)
     {
+        end.z = -2;
         transform.position = end;
     }
 

@@ -16,6 +16,9 @@ public class Board : MonoBehaviour
     [SerializeField]
     private GameObject playerCharacter;
 
+    [SerializeField]
+    private GameObject enemyCharacter;
+
 
     private Dictionary<int, TileBase> tiles = new Dictionary<int, TileBase>();
     private Tilemap baseTilemap;
@@ -50,6 +53,9 @@ public class Board : MonoBehaviour
         //Vector3 startPos = new Vector3Int(0,0,0);
         GameObject pc = Instantiate(playerCharacter, startPos, Quaternion.identity);
         pc.GetComponent<PlayerController>().currentNode = grid[0,0];
+
+        GameObject enemyOne = Instantiate(enemyCharacter, new Vector3(5.5f,5.5f,-1f), Quaternion.identity);
+        enemyOne.GetComponent<EnemyController>().currentNode = grid[6,6];
         // Debug.Log("Starting Node: " + grid[0,0].gridPos);
         // Debug.Log("Starting Up: " + grid[0,0].Up.gridPos);
         // Debug.Log("Starting Down: " + grid[0,0].Down);
