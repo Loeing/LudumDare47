@@ -7,8 +7,10 @@ public class GameMaster : MonoBehaviour {
     private Board board;
     private int level = 1;
 
+    public bool playerTurn = true;
     public List<Item> items;
     public List<EnemyController> enemies;
+    //TODO: add list of past yous
     
 
     private void Awake() {
@@ -26,8 +28,25 @@ public class GameMaster : MonoBehaviour {
         
         InitGame();
     }
-   void InitGame()
+    private void InitGame()
     {
         board.InitGame(1);
+    }
+
+    private void Update()
+    {
+        if(!playerTurn)
+        {
+            MoveEnemies();
+        }
+    }
+
+    private void MoveEnemies()
+    {
+        foreach(EnemyController enemy in enemies)
+        {
+            enemy.MoveRand();
+        }
+        playerTurn = true;
     }
 }
