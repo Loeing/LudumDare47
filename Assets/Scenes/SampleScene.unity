@@ -273,13 +273,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 823233909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.5499171, y: -0.7760329, z: 0.8213088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 309984818}
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1270427799}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &823233911
 MonoBehaviour:
@@ -295,7 +295,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   floor: {fileID: 11400000, guid: ebf7f8f4130307147a555251af6076f1, type: 2}
   obstacle: {fileID: 11400000, guid: c0ec5d61109855249b2e21c011da34f9, type: 2}
-  playerCharacter: {fileID: 0}
+  playerCharacter: {fileID: 7590263318955299205, guid: f67b30ab46a68906ea58a4d52269d548,
+    type: 3}
 --- !u!114 &823233912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,3 +454,49 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1270427797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1270427799}
+  - component: {fileID: 1270427798}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1270427798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270427797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dc967c97c5fb6e46a3f26f8f39be6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  enemies: []
+--- !u!4 &1270427799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1270427797}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.5499171, y: 0.7760329, z: -0.8213088}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 823233910}
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
