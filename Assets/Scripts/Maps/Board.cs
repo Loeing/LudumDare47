@@ -63,6 +63,13 @@ public class Board : MonoBehaviour
         // Debug.Log("Starting Right: " + grid[0,0].Right.gridPos);
     }
 
+    public void PlaceInstance(GameObject go, int x, int y, int z=-1)
+    {
+        Node placementNode = grid[x, y];
+        Vector3 placement = new Vector3(placementNode.center.x , placementNode.center.y, z);
+        GameObject instance = Instantiate(go, placement, Quaternion.identity);
+    }
+
     private int[,] ListToMap(int[] tiles, int rowLength)
     {
         //Debug.Log(tiles.Length);

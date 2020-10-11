@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Node //should it be a monobehavior if it's just holding our data?
@@ -20,14 +21,15 @@ public class Node //should it be a monobehavior if it's just holding our data?
     
     public List<Node> GetNeighbors() 
     {
-        if(neighbors.Exists())
+        if(neighbors!=null && neighbors.Any())
         {
             return neighbors;
-        } else {
-            neighbors = new List<Node>(Up, Down, Left, Right);
-            neighbors.RemoveAll(node => node == null);
-        }
+        } 
+        neighbors = new List<Node>(){Up, Down, Left, Right};
+        neighbors.RemoveAll(node => node == null);
+        return neighbors;
     }
+    
     public Dictionary<int, bool> passableTiles = new Dictionary<int, bool>(){
         { 1, true},
         { 2, false}

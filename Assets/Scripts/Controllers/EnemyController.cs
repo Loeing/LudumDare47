@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ICollection;
 using System;
 using System.Linq;
 
@@ -9,7 +8,7 @@ public class EnemyController : MoveController {
     
     MoveController target;
 
-    void Start()
+    protected override void Start()
     {
         GameMaster.instance.enemies.Add(this);
         target = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
@@ -31,10 +30,10 @@ public class EnemyController : MoveController {
     }
 
     //Need A*
-    private Queue<Node> AStar()
-    {
+    // private Queue<Node> AStar()
+    // {
 
-    }
+    // }
     private Node BFS(Node target, Node root) 
     {
         Queue<Node> visited = new Queue<Node>();
@@ -42,7 +41,7 @@ public class EnemyController : MoveController {
         discovered.Enqueue(root);
         while(discovered.Count > 0)
         {
-            Node visiting = discovered.Dequeue;
+            Node visiting = discovered.Dequeue();
             if(visiting.Equals(target))//probably do something with occupier
             {
                 return visiting;
@@ -55,7 +54,7 @@ public class EnemyController : MoveController {
                     discovered.Enqueue(neighbor);
                 }
             }
-
         }
+        return null;
     }
 }
