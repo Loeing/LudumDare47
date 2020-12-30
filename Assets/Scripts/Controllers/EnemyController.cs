@@ -15,6 +15,11 @@ public class EnemyController : MoveController {
         base.Start();
     }
 
+    protected override void DestroyEntity()
+    {
+        GameMaster.instance.enemies.Remove(this);
+        base.DestroyEntity();
+    }
     public void MoveCloser()
     {
         Vector2 targetPos = target.currentNode.gridPos;
@@ -34,6 +39,7 @@ public class EnemyController : MoveController {
     // {
 
     // }
+    
     private Node BFS(Node target, Node root) 
     {
         Queue<Node> visited = new Queue<Node>();

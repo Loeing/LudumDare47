@@ -8,18 +8,28 @@ public enum Direction
     Left,
     Right
 }
-public abstract class MoveController : MonoBehaviour {
+
+
+//TODO: instead of an innheritance system, each part should be a component that the overall controller talks to. Would make for easier debugging
+
+//TODO: controllers should have an entity, not inherit from them
+// why though? so we can init entities with variables?
+// ugh why am I doing this to support that dumb json loader?
+public abstract class MoveController : Entity {
     
     [SerializeField]
     private float tileDistance = 1f;
     public float moveTime = 0.05f;
 
-    [SerializeField]
-    public Node currentNode; 
+
 
     private BoxCollider2D boxCollider;
     private Rigidbody2D rb2D;
     private float inverseMoveTime;
+    private GameMaster gm;
+    private bool inPassage = false; 
+    
+
 
 
     protected virtual void Start() {
@@ -31,25 +41,100 @@ public abstract class MoveController : MonoBehaviour {
 
         //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
         inverseMoveTime = 1f / moveTime;
+        
+        gm = GameMaster.instance;
     }
 
     public virtual void Move(Direction dir, bool axisMove=false)
     {
-        Node endNode = currentNode;
+        //Debug.Log(this.currentNode);
+        Node curNode = this.currentNode;
+        //Debug.Log(curNode);
+        curNode.Leave();
+        Node endNode = curNode;
         if(axisMove)
         {
-            endNode =  AxisMove(dir, currentNode);
+            endNode =  AxisMove(dir, curNode);
         } else {
-            endNode = CheckMove(dir, currentNode);
-            if(!endNode.IsPassable())
-            {
-                endNode = currentNode;
-                //TODO: add non passable options like combat
-            }
-            SharpMovement(endNode.center);
+            endNode = DirectMove(dir, curNode);
         }
         //StartCoroutine(SmoothMovement(endNode.center)); //add a bounce when not going anywhere
         currentNode = endNode;
+        currentNode.Occupy(this);
+        // Debug.Log("Team: " + this.team);
+        // Debug.Log("Destination coord: " + currentNode.gridPos);
+        // Debug.Log("Destination center: " + currentNode.center);
+        // Debug.Log("Passage here: " + currentNode.Passage);
+        if(currentNode.Passage != null)
+        {
+            if(!inPassage) 
+            {
+                Debug.Log("Leaving Room");
+                this.LeaveRoom(currentNode.Passage);
+                inPassage = true;
+            }
+        } else {
+            inPassage = false;
+        }
+    }
+
+    public void LeaveRoom(Passage passage)
+    {
+        if(passage.destRoom != currentNode.room)
+        {
+            if(gm == null)
+            {
+                gm = GameMaster.instance;
+            }
+            Debug.Log(gm);
+            Debug.Log(gm.rooms);
+            Room curRoom = gm.rooms[currentNode.room];
+            curRoom.Entities.Remove(this.gameObject);
+            currentNode.Leave(); //leave passage
+            Room destRoom = gm.rooms[passage.destRoom];
+            destRoom.Entities.Add(this.gameObject);
+            this.currentNode = destRoom.NodeGrid[passage.destX, passage.destY];
+            this.currentNode.Occupy(this);
+            //this is bad but whatever
+            if(this.Visible)
+            {
+                this.Erase();
+            }
+            if(destRoom.Key == gm.board.currentRoom.Key)
+            {
+                this.Draw();
+            }
+            SharpMovement(this.currentNode.center);
+        }
+    }
+
+    public bool IsOpponent(GameObject other)
+    {
+        //probably needs a per type override
+        //TODO: also check for specific tag to handle allies
+        return gameObject.tag != other.tag;
+    }
+
+    private Node DirectMove(Direction dir, Node node)
+    {
+        Node endNode = CheckMove(dir, node);
+        Debug.Log("Team: " + this.team + " room: " + currentNode.room + " current node: " + currentNode.gridPos + " target node: " + endNode.gridPos + " dir: " + dir);
+        if(!endNode.IsPassable())
+        {   
+            Debug.Log("Impassible node: " + endNode.gridPos);
+            if(endNode.occupier)
+            {
+                if(IsOpponent(endNode.occupier.gameObject))
+                {
+                    //endNode.occupier.LoseHealth(1);     
+                }
+            }
+            
+            //TODO: add non passable options like combat
+            endNode = node;
+        }
+        SharpMovement(endNode.center);
+        return endNode;
     }
 
     private Node AxisMove(Direction dir, Node node)
@@ -77,15 +162,11 @@ public abstract class MoveController : MonoBehaviour {
 
     private Node CheckMove(Direction dir, Node node)
     {
-        Debug.Log("Current Node:");
-        Debug.Log(node.gridPos);
-        Debug.Log("Direction Node");
+        //Debug.Log("Current Node: " + node.gridPos);
         if(dir == Direction.Up)
         {
             if(node.Up != null) 
             {
-                Debug.Log(node.Up.gridPos);
-                Debug.Log(node.Up.center);
                 return node.Up;
             }
         }
@@ -94,8 +175,6 @@ public abstract class MoveController : MonoBehaviour {
         {
             if(node.Down != null) 
             {
-                Debug.Log(node.Down.gridPos);
-                Debug.Log(node.Down.center);
                 return node.Down;
             }
         }
@@ -103,8 +182,6 @@ public abstract class MoveController : MonoBehaviour {
         {
             if(node.Left != null) 
             {
-                Debug.Log(node.Left.gridPos);
-                Debug.Log(node.Left.center);
                 return node.Left;
             }
         } 
@@ -113,8 +190,6 @@ public abstract class MoveController : MonoBehaviour {
         {
             if(node.Right != null) 
             {
-                Debug.Log(node.Right.gridPos);
-                Debug.Log(node.Right.center);
                 return node.Right;
             }
         }
@@ -125,6 +200,7 @@ public abstract class MoveController : MonoBehaviour {
     {
         end.z = -2;
         transform.position = end;
+        //Debug.Log("Move Pos: " + end);
     }
 
     //Shamelessly grabbed from the 2D roguelike tutorial

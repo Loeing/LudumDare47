@@ -273,7 +273,6 @@ GameObject:
   m_Component:
   - component: {fileID: 647746786}
   - component: {fileID: 647746785}
-  - component: {fileID: 647746784}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -281,18 +280,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &647746784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 647746783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8495cc6428add5841933aa22d2f1f935, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &647746785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +298,7 @@ MonoBehaviour:
     type: 3}
   enemyCharacter: {fileID: 8580187896428709503, guid: 2c6588e91f0c6ac70a2ce8746713546d,
     type: 3}
+  currentRoom: {fileID: 0}
 --- !u!4 &647746786
 Transform:
   m_ObjectHideFlags: 0
@@ -336,6 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 962868449}
   - component: {fileID: 962868448}
+  - component: {fileID: 962868450}
   m_Layer: 0
   m_Name: GameMaster
   m_TagString: Untagged
@@ -373,6 +362,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &962868450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962868447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8495cc6428add5841933aa22d2f1f935, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomObject: {fileID: 8922716307806698277, guid: cf432889e24f72e93bb85673e9991c52,
+    type: 3}
 --- !u!1 &1010767121
 GameObject:
   m_ObjectHideFlags: 0

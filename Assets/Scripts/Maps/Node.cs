@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Node //should it be a monobehavior if it's just holding our data?
 { 
+    public int room;
     public Vector3 center; 
     public Vector2 gridPos;
     public Node Up {get; set;}
@@ -15,8 +16,10 @@ public class Node //should it be a monobehavior if it's just holding our data?
     public Item item;
     public bool occupied = false;
     
+    public Passage Passage {get; set;} = null;
+
     public bool passable = true;
-    public MoveController occupier;
+    public Entity occupier;
     private List<Node> neighbors;
     
     public List<Node> GetNeighbors() 
@@ -31,21 +34,33 @@ public class Node //should it be a monobehavior if it's just holding our data?
     }
     
     public Dictionary<int, bool> passableTiles = new Dictionary<int, bool>(){
+        { 0, false},
         { 1, true},
-        { 2, false}
+        { 2, false},
+        { 3, true}
     };
 
-    public Node(Vector2 gridPos, Vector3 center, int tileType)
+    public Node(int room, Vector2 gridPos, Vector3 center, int tileType)
     {
+        this.room =  room;
         this.center = center;
         this.gridPos = gridPos;
         this.passable = passableTiles[tileType];
     }
 
-    public void Occupy()
+    public void Occupy(Entity occupier)
     {
-
+        this.occupier = occupier;
+        this.occupied = true;
+        occupier.currentNode = this;
     }
+
+    public void Leave()
+    {
+        this.occupier = null;
+        this.occupied = false;
+    }
+
     public bool IsPassable()
     {
         return passable && !occupied;
