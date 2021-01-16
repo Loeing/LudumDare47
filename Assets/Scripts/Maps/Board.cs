@@ -83,7 +83,7 @@ public class Board : MonoBehaviour
     {
         currentRoom = room;
         grid = room.NodeGrid;
-        Debug.Log(room.TileGrid);
+        //Debug.Log(room.TileGrid);
         MapFunctions.RenderMap(room.TileGrid, baseTilemap, tiles);
         foreach(GameObject entity in room.Entities)
         {

@@ -1,21 +1,26 @@
 using UnityEngine;
 
-public class PlayerController : MoveController
+public class PlayerController : MonoBehaviour 
 {
     private Board board;
     private GameMaster gm;
+    private Entity entity;
+    private MoveComponent moveComponent;
 
     private void Start()
     {
         gm = GameMaster.instance;
         board = Board.instance;
+        //Hopefully this is enough
+        entity = GetComponent<Entity>();
+        moveComponent = GetComponent<MoveComponent>();
     }
 
     private void Update() 
     {
         if(gm.playerTurn)
         {   
-            HandleInputs();           
+            HandleInputs();          
         } 
     }
 
@@ -41,14 +46,15 @@ public class PlayerController : MoveController
 
     public void Move(Direction dir)
     {
-        base.Move(dir);
-        Debug.Log("current Node Room : " + currentNode.room);
-        Debug.Log("board Room: " + board.currentRoom.Key);
-        Debug.Log("current Node: " + this.currentNode.gridPos);
-        if(this.currentNode.room != board.currentRoom.Key)
+        moveComponent.Move(dir);
+        // Debug.Log("current Node Room : " + entity.currentNode.room);
+        // Debug.Log("board Room: " + board.currentRoom.Key);
+        // Debug.Log("current Node: " + entity.currentNode.gridPos);
+        if(entity.currentNode.room != board.currentRoom.Key)
         {
+            //TODO: add somesort of screen wipe
             board.Erase();
-            board.Draw(gm.rooms[this.currentNode.room]);
+            board.Draw(gm.rooms[entity.currentNode.room]);
         }
         gm.playerTurn = false; //should probably separate out player turn sutff
     }

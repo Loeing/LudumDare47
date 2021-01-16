@@ -21,6 +21,13 @@ public class Node //should it be a monobehavior if it's just holding our data?
     public bool passable = true;
     public Entity occupier;
     private List<Node> neighbors;
+
+    /*****FOR PATHFINDING*****/
+    //maybe we shouldn't add this functionality here and instead have another class for pathfinding, but honestly, this seems fine
+    //can't do anything in parrallel except with deep copy, but that's ok
+    public float Heuristic = float.MaxValue;
+    public Node Parent;
+
     
     public List<Node> GetNeighbors() 
     {

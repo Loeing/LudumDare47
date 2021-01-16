@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Priority_Queue;
 
 public class GameMaster : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class GameMaster : MonoBehaviour {
     
     private LevelDataLoader _dataLoader;
     public Dictionary<int, Room> rooms;
-    
+
 
     private void Awake() 
     {

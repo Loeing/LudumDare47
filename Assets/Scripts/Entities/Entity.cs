@@ -10,7 +10,7 @@ public enum Team
 //not having this be an abtract monobehavior is probably dumb
 //should just use the monobehavior as intended
 // only benefit of this is defining everything in the json
-public abstract class Entity : MonoBehaviour 
+public class Entity : MonoBehaviour 
 {
     
    // public GameObject prefab;
@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
     //     this.Health = maxHealth;
     // }
 
-    public virtual void LoseHealth(int loss)
+    public void LoseHealth(int loss)
     {
         Health -= loss;
         if(Health <= 0)
@@ -50,7 +50,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    protected virtual void DestroyEntity()
+    protected void DestroyEntity()
     {
         //TODO: handle animation, loot drop, etc
         currentNode.Leave();
@@ -58,13 +58,13 @@ public abstract class Entity : MonoBehaviour
         //Destroy(gameObject);
     }
 
-    public virtual void Draw()
+    public void Draw()
     {
         renderer.enabled = true;
         Visible = true;
     }
 
-    public virtual void Erase()
+    public void Erase()
     {
         renderer.enabled = false;
         Visible = false;

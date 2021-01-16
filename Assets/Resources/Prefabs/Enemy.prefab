@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1671415024189091000}
   - component: {fileID: 388359552025725593}
   - component: {fileID: 5695589996062806962}
+  - component: {fileID: 8468001161665608750}
+  - component: {fileID: 4433594795755380898}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -94,7 +96,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13ddf1623607bd14b9b9edfe83354ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 1
+--- !u!114 &8468001161665608750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8580187896428709503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bfb3fc83bdc65b38ab2339fa078bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   tileDistance: 1
   moveTime: 0.05
-  gm: {fileID: 0}
+  entityKey: 0
+  entity: {fileID: 0}
+--- !u!114 &4433594795755380898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8580187896428709503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4650a4c716b751e810ca74e5ddc9cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 1

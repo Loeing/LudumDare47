@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floor: {fileID: 11400000, guid: ebf7f8f4130307147a555251af6076f1, type: 2}
+  background: {fileID: 0}
+  passage: {fileID: 11400000, guid: edb88909650c8572380acf054ad7efca, type: 2}
   obstacle: {fileID: 11400000, guid: c0ec5d61109855249b2e21c011da34f9, type: 2}
   playerCharacter: {fileID: 7590263318955299205, guid: f67b30ab46a68906ea58a4d52269d548,
     type: 3}
@@ -344,9 +346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc967c97c5fb6e46a3f26f8f39be6d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 0}
   playerTurn: 1
   items: []
-  enemies: []
 --- !u!4 &962868449
 Transform:
   m_ObjectHideFlags: 0

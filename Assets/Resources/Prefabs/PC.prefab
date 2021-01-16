@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 2623560321116696839}
   - component: {fileID: 2959371665849438970}
   - component: {fileID: 4538173054615067769}
-  - component: {fileID: 8040980109662515631}
+  - component: {fileID: -852576869841402817}
+  - component: {fileID: -8444968385461954328}
+  - component: {fileID: -4926312946276013313}
   m_Layer: 0
   m_Name: PC
   m_TagString: Player
@@ -131,7 +133,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8040980109662515631
+--- !u!114 &-852576869841402817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590263318955299205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55bfb3fc83bdc65b38ab2339fa078bcf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tileDistance: 1
+  moveTime: 0.05
+  entityKey: 0
+  entity: {fileID: 0}
+--- !u!114 &-8444968385461954328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7590263318955299205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a4650a4c716b751e810ca74e5ddc9cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
+--- !u!114 &-4926312946276013313
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,5 +174,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b86a7b409cad58a4b8912f6b7a145ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileDistance: 1
-  moveTime: 0.1
